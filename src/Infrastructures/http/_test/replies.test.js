@@ -39,63 +39,57 @@ describe("/replies endpoints", () => {
       expect(result.message).toEqual("Missing authentication");
     });
 
-    if (
-      ("should response 400 when not meet property requirement",
-      async () => {
-        const payload = {};
+    it("should response 400 when not meet property requirement", async () => {
+      const payload = {};
 
-        const server = await createServer(container);
+      const server = await createServer(container);
 
-        const { token } = await ServerTestHelper.getCredential(server);
+      const { token } = await ServerTestHelper.getCredential(server);
 
-        const response = await server.inject({
-          method: "POST",
-          url: "/threads/thread-123/comments/comment-123/replies",
-          payload: payload,
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
+      const response = await server.inject({
+        method: "POST",
+        url: "/threads/thread-123/comments/comment-123/replies",
+        payload: payload,
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
 
-        expect(response.statusCode).toEqual(400);
+      expect(response.statusCode).toEqual(400);
 
-        const result = JSON.parse(response.payload);
-        expect(result.status).toEqual("fail");
-        expect(result.message).toEqual(
-          "unable to post new reply due to uncomplete property"
-        );
-      })
-    );
+      const result = JSON.parse(response.payload);
+      expect(result.status).toEqual("fail");
+      expect(result.message).toEqual(
+        "unable to post new reply due to uncomplete property"
+      );
+    });
 
-    if (
-      ("should response 400 when not meet data type requirement",
-      async () => {
-        const payload = {
-          content: 9.0,
-        };
+    it("should response 400 when not meet data type requirement", async () => {
+      const payload = {
+        content: 9.0,
+      };
 
-        const server = await createServer(container);
+      const server = await createServer(container);
 
-        const { token } = await ServerTestHelper.getCredential(server);
+      const { token } = await ServerTestHelper.getCredential(server);
 
-        const response = await server.inject({
-          method: "POST",
-          url: "/threads/thread-8810/comments/comment-123/replies",
-          payload: payload,
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
+      const response = await server.inject({
+        method: "POST",
+        url: "/threads/thread-8810/comments/comment-123/replies",
+        payload: payload,
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
 
-        expect(response.statusCode).toEqual(400);
+      expect(response.statusCode).toEqual(400);
 
-        const result = JSON.parse(response.payload);
-        expect(result.status).toEqual("fail");
-        expect(result.message).toEqual(
-          "unable to post new reply due to invalid data type"
-        );
-      })
-    );
+      const result = JSON.parse(response.payload);
+      expect(result.status).toEqual("fail");
+      expect(result.message).toEqual(
+        "unable to post new reply due to invalid data type"
+      );
+    });
 
     it("should response 404 when given invalid thread", async () => {
       const payload = {
@@ -164,11 +158,11 @@ describe("/replies endpoints", () => {
 
       await UsersTableTestHelper.addUser({
         id: "user-6969",
-        username: "goodgame",
+        username: "test",
       });
       await ThreadsTableTestHelper.addThread({
         id: "thread-123",
-        title: "apapun",
+        title: "test",
         owner: "user-6969",
       });
       await CommentsTableTestHelper.addComment({
@@ -204,14 +198,15 @@ describe("/replies endpoints", () => {
         id: "comment-6868",
         owner: "user-6969",
         thread_id: "thread-123",
-        content: "apapun yang penting tes",
+        content: "ini adalah test",
       });
 
       await RepliesTableTestHelper.addReply({
         id: "reply-6868",
         owner: "user-6969",
         comment_id: "comment-6868",
-        content: "apapun yang penting tes",
+        content: "ini adalah test",
+        thread_id: "thread-123",
       });
 
       const response = await server.inject({
@@ -255,14 +250,15 @@ describe("/replies endpoints", () => {
         id: "comment-169",
         owner: user_id,
         thread_id: "thread-123",
-        content: "apapun yang penting tes",
+        content: "ini adalah test",
       });
 
       await RepliesTableTestHelper.addReply({
         id: "reply-1009",
         owner: user_id,
         comment_id: "comment-169",
-        content: "apapun yang penting tes",
+        content: "ini adalah test",
+        thread_id: "thread-123", 
       });
 
       const response = await server.inject({

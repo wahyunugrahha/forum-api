@@ -12,14 +12,14 @@ class ReplyRepositoryPostgres extends ReplyRepository {
   }
 
   async addReply(newReply) {
-    const { comment_id, content, owner } = newReply;
+    const { comment_id, content, owner, thread_id } = newReply;
     const id = `reply-${this._idGenerator()}`;
     const date = new Date().toISOString();
-    const del = false;
+    const is_deleted = false;
 
     const query = {
-      text: "INSERT INTO replies VALUES($1, $2, $3, $4, $5, $6) RETURNING id, content,owner",
-      values: [id, owner, comment_id, content, del, date],
+      text: "INSERT INTO replies(id, owner, comment_id, thread_id, content, is_deleted, date) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id, content,owner",
+      values: [id, owner, comment_id, thread_id, content, is_deleted, date],
     };
 
     const result = await this._pool.query(query);
