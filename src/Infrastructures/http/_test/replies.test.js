@@ -75,7 +75,7 @@ describe("/replies endpoints", () => {
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread-8810/comments/comment-123/replies",
+        url: "/threads/thread-126/comments/comment-123/replies",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,

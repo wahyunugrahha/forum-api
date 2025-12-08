@@ -119,7 +119,7 @@ describe("ReplyRepository Postgres", () => {
       const replyRepository = new ReplyRepositoryPostgres(pool, fakeGenerator);
 
       await expect(
-        replyRepository.verifyReplyOwner("reply-123", "user-1230")
+        replyRepository.verifyReplyOwner("reply-123", "user-128")
       ).rejects.toThrowError(AuthorizationError);
     });
 
@@ -275,7 +275,7 @@ describe("ReplyRepository Postgres", () => {
       await RepliesTableTestHelper.addReply({
         id: "reply-124",
         comment_id: "comment-123",
-        content: "1236 comment",
+        content: "1 comment",
         owner: "user-123",
         date: new Date("2024-10-27T00:00:00.000Z"),
       });
@@ -283,7 +283,7 @@ describe("ReplyRepository Postgres", () => {
       await RepliesTableTestHelper.addReply({
         id: "reply-125",
         comment_id: "comment-125",
-        content: "12223 comment",
+        content: "2 comment",
         owner: "user-123",
         date: new Date("2024-10-28T00:00:00.000Z"),
       });
@@ -304,7 +304,7 @@ describe("ReplyRepository Postgres", () => {
         new GetReply({
           id: "reply-124",
           comment_id: "comment-123",
-          content: "1236 comment",
+          content: "1 comment",
           username: "test",
           date: new Date("2024-10-27T00:00:00.000Z"),
           is_deleted: false,
@@ -312,7 +312,7 @@ describe("ReplyRepository Postgres", () => {
         new GetReply({
           id: "reply-125",
           comment_id: "comment-125",
-          content: "12223 comment",
+          content: "2 comment",
           username: "test",
           date: new Date("2024-10-28T00:00:00.000Z"),
           is_deleted: false,

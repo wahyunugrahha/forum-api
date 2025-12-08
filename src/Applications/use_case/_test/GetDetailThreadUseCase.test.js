@@ -56,7 +56,7 @@ describe("GetDetailThreadUseCase", () => {
         new GetReply({
           id: "reply-123",
           comment_id: "comment-125",
-          content: "123 reply",
+          content: "1 reply",
           username: "testuser1",
           date: new Date("2024-10-26T00:00:00Z"),
           is_deleted: true,
@@ -64,7 +64,7 @@ describe("GetDetailThreadUseCase", () => {
         new GetReply({
           id: "reply-128",
           comment_id: "comment-125",
-          content: "693 reply",
+          content: "2 reply",
           username: "testuser2",
           date: new Date("2024-10-26T00:00:00Z"),
           is_deleted: false,
@@ -111,7 +111,7 @@ describe("GetDetailThreadUseCase", () => {
                 id: "reply-128",
                 username: "testuser2",
                 date: new Date("2024-10-26T00:00:00Z"),
-                content: "693 reply",
+                content: "2 reply",
               },
             ],
           },

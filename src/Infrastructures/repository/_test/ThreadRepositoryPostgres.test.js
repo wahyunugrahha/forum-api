@@ -66,8 +66,8 @@ describe("ThreadRepositoryPostgres", () => {
       });
       await ThreadsTableTestHelper.addThread({
         id: "thread124",
-        title: "dicoding testing",
-        body: "cuman testing doang",
+        title: "testcoy",
+        body: "testing",
         owner: "user-123",
       });
 
@@ -87,8 +87,8 @@ describe("ThreadRepositoryPostgres", () => {
 
       await ThreadsTableTestHelper.addThread({
         id: "thread124",
-        title: "dicoding testing",
-        body: "cuman testing doang",
+        title: "testcoy",
+        body: "testing",
         owner: "user-123",
       });
 
@@ -96,8 +96,8 @@ describe("ThreadRepositoryPostgres", () => {
 
       const expectedResult = new GetThread({
         id: "thread124",
-        title: "dicoding testing",
-        body: "cuman testing doang",
+        title: "testcoy",
+        body: "testing",
         date: new Date("2024-10-26T00:00:00.000Z"),
         username: "testuser123",
         comments: [],
