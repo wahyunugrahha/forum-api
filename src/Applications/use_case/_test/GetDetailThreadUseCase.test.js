@@ -4,7 +4,6 @@ const GetReply = require("../../../Domains/replies/entities/GetReply");
 const ReplyRepository = require("../../../Domains/replies/ReplyRepository");
 const GetThread = require("../../../Domains/threads/entities/GetThread");
 const ThreadRepository = require("../../../Domains/threads/ThreadRepository");
-const comments = require("../../../Interfaces/http/api/comments");
 const GetDetailThreadUseCase = require("../GetDetailThreadUseCase");
 
 describe("GetDetailThreadUseCase", () => {
@@ -33,42 +32,42 @@ describe("GetDetailThreadUseCase", () => {
       .fn()
       .mockImplementation(() => {
         return [
-          new GetComment({
+          {
             id: "comment-123",
             content: "testcomment",
             username: "testuser1",
             date: new Date("2024-10-26T00:00:00Z"),
             is_deleted: true,
-          }),
-          new GetComment({
+          },
+          {
             id: "comment-125",
             content: "testkomen",
             username: "testuser2",
             date: new Date("2024-10-26T00:00:00Z"),
             is_deleted: false,
-          }),
+          },
         ];
       });
 
     const mockReplyRepository = new ReplyRepository();
     mockReplyRepository.getThreadReplies = jest.fn().mockImplementation(() => {
       return [
-        new GetReply({
+        {
           id: "reply-123",
           comment_id: "comment-125",
           content: "1 reply",
           username: "testuser1",
           date: new Date("2024-10-26T00:00:00Z"),
           is_deleted: true,
-        }),
-        new GetReply({
+        },
+        {
           id: "reply-128",
           comment_id: "comment-125",
           content: "2 reply",
           username: "testuser2",
           date: new Date("2024-10-26T00:00:00Z"),
           is_deleted: false,
-        }),
+        },
       ];
     });
 
