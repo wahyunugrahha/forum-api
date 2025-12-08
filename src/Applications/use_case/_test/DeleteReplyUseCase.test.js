@@ -5,7 +5,7 @@ describe("DeleteReplyUseCase", () => {
   it("should orchestrating the delete reply action correctly", async () => {
     const payload = {
       reply_id: "reply-123",
-      thread_id: "thread1243",
+      thread_id: "thread123",
       owner: "user-123",
       comment_id: "comment-123",
     };

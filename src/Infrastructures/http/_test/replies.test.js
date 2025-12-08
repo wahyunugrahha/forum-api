@@ -28,7 +28,7 @@ describe("/replies endpoints", () => {
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread1243/comments/comment-123/replies",
+        url: "/threads/thread123/comments/comment-123/replies",
         payload: payload,
       });
 
@@ -48,7 +48,7 @@ describe("/replies endpoints", () => {
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread1243/comments/comment-123/replies",
+        url: "/threads/thread123/comments/comment-123/replies",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,
@@ -101,7 +101,7 @@ describe("/replies endpoints", () => {
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread1243/comments/comment-123/replies",
+        url: "/threads/thread123/comments/comment-123/replies",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,
@@ -161,19 +161,19 @@ describe("/replies endpoints", () => {
         username: "test",
       });
       await ThreadsTableTestHelper.addThread({
-        id: "thread1243",
+        id: "thread123",
         title: "test",
         owner: "user-124",
       });
       await CommentsTableTestHelper.addComment({
         id: "comment-124",
-        thread_id: "thread1243",
+        thread_id: "thread123",
         owner: "user-124",
       });
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread1243/comments/comment-124/replies",
+        url: "/threads/thread123/comments/comment-124/replies",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,
@@ -197,7 +197,7 @@ describe("/replies endpoints", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-125",
         owner: "user-124",
-        thread_id: "thread1243",
+        thread_id: "thread123",
         content: "ini adalah test",
       });
 
@@ -206,12 +206,12 @@ describe("/replies endpoints", () => {
         owner: "user-124",
         comment_id: "comment-125",
         content: "ini adalah test",
-        thread_id: "thread1243",
+        thread_id: "thread123",
       });
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread1243/comments/comment-125/replies/reply-126",
+        url: "/threads/thread123/comments/comment-125/replies/reply-126",
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -230,7 +230,7 @@ describe("/replies endpoints", () => {
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread1243/comments/comment-12390/replies/reply-123",
+        url: "/threads/thread123/comments/comment-12390/replies/reply-123",
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -249,7 +249,7 @@ describe("/replies endpoints", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-126",
         owner: user_id,
-        thread_id: "thread1243",
+        thread_id: "thread123",
         content: "ini adalah test",
       });
 
@@ -258,12 +258,12 @@ describe("/replies endpoints", () => {
         owner: user_id,
         comment_id: "comment-126",
         content: "ini adalah test",
-        thread_id: "thread1243",
+        thread_id: "thread123",
       });
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread1243/comments/comment-126/replies/reply-127",
+        url: "/threads/thread123/comments/comment-126/replies/reply-127",
         headers: {
           authorization: `Bearer ${token}`,
         },

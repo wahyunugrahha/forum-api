@@ -13,7 +13,7 @@ describe("an NewThread Entity", () => {
 
   it("should throw error when payload did not meet data type specification", () => {
     const payload = {
-      title: test123,
+      title: "test123",
       body: "testcuy",
       owner: true,
     };

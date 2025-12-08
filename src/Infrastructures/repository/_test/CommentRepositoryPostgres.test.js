@@ -25,7 +25,7 @@ describe("CommentRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
         title: "test",
@@ -85,7 +85,7 @@ describe("CommentRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
         title: "test",
@@ -95,7 +95,7 @@ describe("CommentRepository Postgres", () => {
 
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
-        thread_id: "thread1243",
+        thread_id: "thread123",
         owner: owner,
       });
 
@@ -130,7 +130,7 @@ describe("CommentRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
         title: "test",
@@ -140,12 +140,12 @@ describe("CommentRepository Postgres", () => {
 
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
-        thread_id: "thread1243",
+        thread_id: "thread123",
         owner: owner,
       });
 
       expect(
-        commentRepository.verifyCommentThread("comment-123", "thread1243")
+        commentRepository.verifyCommentThread("comment-123", "thread123")
       ).resolves.not.toThrowError(NotFoundError);
     });
   });
@@ -155,7 +155,7 @@ describe("CommentRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
         title: "test",
@@ -196,7 +196,7 @@ describe("CommentRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner, username: "test" });
 
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
         title: "test",
@@ -215,7 +215,7 @@ describe("CommentRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner, username: "test" });
 
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
         title: "test",

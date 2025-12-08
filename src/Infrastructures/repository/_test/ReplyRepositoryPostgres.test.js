@@ -27,7 +27,7 @@ describe("ReplyRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
         title: "test",
@@ -45,7 +45,7 @@ describe("ReplyRepository Postgres", () => {
       const replyRepository = new ReplyRepositoryPostgres(pool, fakeGenerator);
 
       const newReply = new NewReply({
-        thread_id: "thread1243",
+        thread_id: "thread123",
         comment_id: "comment-123",
         content: "test",        owner: "user-123",
       });
@@ -79,7 +79,7 @@ describe("ReplyRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
         title: "test",
@@ -106,7 +106,7 @@ describe("ReplyRepository Postgres", () => {
         replyRepository.verifyReplyStatus(
           "reply-123",
           "comment-123",
-          "thread1243"
+          "thread123"
         )
       ).resolves.not.toThrowError(AuthorizationError);
     });
@@ -127,7 +127,7 @@ describe("ReplyRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
         title: "test",
@@ -161,7 +161,7 @@ describe("ReplyRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
         title: "test",
@@ -179,7 +179,7 @@ describe("ReplyRepository Postgres", () => {
       const replyRepository = new ReplyRepositoryPostgres(pool, fakeGenerator);
 
       const newReply = new NewReply({
-        thread_id: "thread1243",
+        thread_id: "thread123",
         comment_id: "comment-123",
         content: "test",        owner: owner,
       });
@@ -199,7 +199,7 @@ describe("ReplyRepository Postgres", () => {
   describe("get thread replies function", () => {
     it("should return empty replies correctly", async () => {
       const owner = "user-123";
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       const date = new Date("2024-10-26T00:00:00.000Z");
 
       await UsersTableTestHelper.addUser({ id: owner, username: "test" });
@@ -236,7 +236,7 @@ describe("ReplyRepository Postgres", () => {
 
     it("should return replies correctly", async () => {
       const owner = "user-123";
-      const thread_id = "thread1243";
+      const thread_id = "thread123";
       const date = new Date("2024-10-26T00:00:00.000Z");
 
       await UsersTableTestHelper.addUser({ id: owner, username: "test" });

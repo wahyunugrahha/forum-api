@@ -26,7 +26,7 @@ describe("/comments endpoints", () => {
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread1243/comments",
+        url: "/threads/thread123/comments",
         payload: payload,
       });
 
@@ -48,7 +48,7 @@ describe("/comments endpoints", () => {
 
         const response = await server.inject({
           method: "POST",
-          url: "/threads/thread1243/comments",
+          url: "/threads/thread123/comments",
           payload: payload,
           headers: {
             authorization: `Bearer ${token}`,
@@ -105,7 +105,7 @@ describe("/comments endpoints", () => {
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread1243/comments",
+        url: "/threads/thread123/comments",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,
@@ -132,14 +132,14 @@ describe("/comments endpoints", () => {
         username: "test2",
       });
       await ThreadsTableTestHelper.addThread({
-        id: "thread1243",
+        id: "thread123",
         title: "test",
         owner: "user-124",
       });
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread1243/comments",
+        url: "/threads/thread123/comments",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,
@@ -163,13 +163,13 @@ describe("/comments endpoints", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-125",
         owner: "user-124",
-        thread_id: "thread1243",
+        thread_id: "thread123",
         content: "ini adalah test",
       });
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread1243/comments/comment-125",
+        url: "/threads/thread123/comments/comment-125",
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -188,7 +188,7 @@ describe("/comments endpoints", () => {
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread1243/comments/comment-12390",
+        url: "/threads/thread123/comments/comment-12390",
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -207,13 +207,13 @@ describe("/comments endpoints", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-126",
         owner: user_id,
-        thread_id: "thread1243",
+        thread_id: "thread123",
         content: "ini adalah test",
       });
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread1243/comments/comment-126",
+        url: "/threads/thread123/comments/comment-126",
         headers: {
           authorization: `Bearer ${token}`,
         },

@@ -38,13 +38,13 @@ describe("ThreadRepositoryPostgres", () => {
       const result = await threadRepository.addThread(newThread);
       expect(result).toStrictEqual(
         new AddedThread({
-          id: "thread1243",
+          id: "thread123",
           title: "test",
           owner: "user-123",
         })
       );
 
-      const expected = await ThreadsTableTestHelper.findThread("thread1243");
+      const expected = await ThreadsTableTestHelper.findThread("thread123");
       expect(expected).toHaveLength(1);
     });
   });
@@ -53,7 +53,7 @@ describe("ThreadRepositoryPostgres", () => {
     it("should throw error 404 when thread not found", async () => {
       const threadRepository = new ThreadRepositoryPostgres(pool, {});
 
-      expect(threadRepository.verifyThread("thread1243")).rejects.toThrowError(
+      expect(threadRepository.verifyThread("thread123")).rejects.toThrowError(
         NotFoundError
       );
     });
@@ -65,14 +65,14 @@ describe("ThreadRepositoryPostgres", () => {
         username: "pokemon",
       });
       await ThreadsTableTestHelper.addThread({
-        id: "thread1243",
+        id: "thread123",
         title: "dicoding testing",
         body: "cuman testing doang",
         owner: "user-123",
       });
 
       await expect(
-        threadRepository.verifyThread("thread1243")
+        threadRepository.verifyThread("thread123")
       ).resolves.not.toThrowError(NotFoundError);
     });
   });
@@ -86,16 +86,16 @@ describe("ThreadRepositoryPostgres", () => {
       });
 
       await ThreadsTableTestHelper.addThread({
-        id: "thread1243",
+        id: "thread123",
         title: "dicoding testing",
         body: "cuman testing doang",
         owner: "user-123",
       });
 
-      const result = await threadRepository.findThread("thread1243");
+      const result = await threadRepository.findThread("thread123");
 
       const expectedResult = new GetThread({
-        id: "thread1243",
+        id: "thread123",
         title: "dicoding testing",
         body: "cuman testing doang",
         date: new Date("2024-10-26T00:00:00.000Z"),

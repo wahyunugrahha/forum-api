@@ -131,7 +131,7 @@ describe("/threads endpoints", () => {
 
       const response = await server.inject({
         method: "GET",
-        url: "/threads/thread1243469",
+        url: "/threads/thread123469",
       });
 
       expect(response.statusCode).toEqual(404);
@@ -149,13 +149,13 @@ describe("/threads endpoints", () => {
         username: "testuser3",
       });
       await ThreadsTableTestHelper.addThread({
-        id: "thread1243",
+        id: "thread123",
         owner: "user-126",
       });
 
       const response = await server.inject({
         method: "GET",
-        url: "/threads/thread1243",
+        url: "/threads/thread123",
       });
 
       expect(response.statusCode).toEqual(200);

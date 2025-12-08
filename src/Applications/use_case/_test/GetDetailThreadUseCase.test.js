@@ -10,7 +10,7 @@ const GetDetailThreadUseCase = require("../GetDetailThreadUseCase");
 describe("GetDetailThreadUseCase", () => {
   it("should orchestrating the get thread detail action correctly", async () => {
     const payload = {
-      thread_id: "thread1243",
+      thread_id: "thread123",
     };
 
     const mockThreadRepository = new ThreadRepository();
@@ -19,7 +19,7 @@ describe("GetDetailThreadUseCase", () => {
       .mockImplementation(() => Promise.resolve());
     mockThreadRepository.findThread = jest.fn().mockImplementation(() => {
       return new GetThread({
-        id: "thread1243",
+        id: "thread123",
         title: "thread 123",
         body: "contect of thread 123",
         date: new Date("2024-10-26T00:00:00Z"),
@@ -57,7 +57,7 @@ describe("GetDetailThreadUseCase", () => {
           id: "reply-123",
           comment_id: "comment-125",
           content: "123 reply",
-          username: "pokemon",
+          username: "testuser1",
           date: new Date("2024-10-26T00:00:00Z"),
           is_deleted: true,
         }),
@@ -65,7 +65,7 @@ describe("GetDetailThreadUseCase", () => {
           id: "reply-128",
           comment_id: "comment-125",
           content: "693 reply",
-          username: "pokemon2",
+          username: "testuser2",
           date: new Date("2024-10-26T00:00:00Z"),
           is_deleted: false,
         }),
@@ -82,7 +82,7 @@ describe("GetDetailThreadUseCase", () => {
 
     expect(result).toEqual(
       new GetThread({
-        id: "thread1243",
+        id: "thread123",
         title: "thread 123",
         body: "contect of thread 123",
         date: new Date("2024-10-26T00:00:00Z"),
