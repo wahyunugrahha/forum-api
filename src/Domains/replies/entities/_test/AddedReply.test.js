@@ -14,7 +14,7 @@ describe("a AddedReply entity", () => {
   it("should throw error when payload did not meet data type specification", () => {
     const payload = {
       id: "reply-123",
-      content: test,
+      content: 123,
       owner: "user-123",
     };
 

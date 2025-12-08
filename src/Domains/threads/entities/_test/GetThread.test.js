@@ -16,7 +16,7 @@ describe("an GetThread Entity", () => {
   it("should throw error when payload did not meet data type specification", () => {
     const payload = {
       id: "test123",
-      title: "test123",
+      title: 123,
       body: "testcuy",
       date: "6969",
       username: 123,
