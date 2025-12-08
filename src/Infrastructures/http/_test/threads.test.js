@@ -18,8 +18,8 @@ describe("/threads endpoints", () => {
   describe("when POST /threads", () => {
     it("should response 401 when not authenticated", async () => {
       const payload = {
-        title: "123",
-        body: "123",
+        title: "test",
+        body: "testcuy",
       };
 
       const server = await createServer(container);
@@ -41,7 +41,7 @@ describe("/threads endpoints", () => {
       ("should response 400 when not meet property requirement",
       async () => {
         const payload = {
-          title: "123",
+          title: "test",
         };
 
         const server = await createServer(container);
@@ -71,7 +71,7 @@ describe("/threads endpoints", () => {
       ("should response 400 when not meet data type requirement",
       async () => {
         const payload = {
-          title: "123",
+          title: "test",
           body: 9.0,
         };
 
@@ -100,8 +100,8 @@ describe("/threads endpoints", () => {
 
     it("should response 201 when meet all requirement and persist thread data", async () => {
       const payload = {
-        title: "123",
-        body: "1234567890",
+        title: "test",
+        body: "testtesttest",
       };
 
       const server = await createServer(container);
@@ -131,7 +131,7 @@ describe("/threads endpoints", () => {
 
       const response = await server.inject({
         method: "GET",
-        url: "/threads/thread-123469",
+        url: "/threads/thread1243469",
       });
 
       expect(response.statusCode).toEqual(404);
@@ -145,17 +145,17 @@ describe("/threads endpoints", () => {
       const server = await createServer(container);
 
       await UsersTableTestHelper.addUser({
-        id: "user-919",
-        username: "Okarun",
+        id: "user-126",
+        username: "testuser3",
       });
       await ThreadsTableTestHelper.addThread({
-        id: "thread-123",
-        owner: "user-919",
+        id: "thread1243",
+        owner: "user-126",
       });
 
       const response = await server.inject({
         method: "GET",
-        url: "/threads/thread-123",
+        url: "/threads/thread1243",
       });
 
       expect(response.statusCode).toEqual(200);
@@ -169,22 +169,22 @@ describe("/threads endpoints", () => {
       const server = await createServer(container);
 
       await UsersTableTestHelper.addUser({
-        id: "user-99",
-        username: "ayase momo",
+        id: "testuser127",
+        username: "testuser7",
       });
       await ThreadsTableTestHelper.addThread({
-        id: "thread-169",
-        owner: "user-99",
+        id: "thread125",
+        owner: "testuser127",
       });
       await CommentsTableTestHelper.addComment({
         id: "comment-1",
-        thread_id: "thread-169",
-        owner: "user-99",
+        thread_id: "thread125",
+        owner: "testuser127",
       });
 
       const response = await server.inject({
         method: "GET",
-        url: "/threads/thread-169",
+        url: "/threads/thread125",
       });
 
       expect(response.statusCode).toEqual(200);

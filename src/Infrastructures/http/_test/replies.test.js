@@ -21,14 +21,14 @@ describe("/replies endpoints", () => {
   describe("when POST /threads/{thread_id}/comments/{comment_id}/replies", () => {
     it("should response 401 when not authenticated", async () => {
       const payload = {
-        content: "123",
+        content: "test",
       };
 
       const server = await createServer(container);
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread-123/comments/comment-123/replies",
+        url: "/threads/thread1243/comments/comment-123/replies",
         payload: payload,
       });
 
@@ -48,7 +48,7 @@ describe("/replies endpoints", () => {
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread-123/comments/comment-123/replies",
+        url: "/threads/thread1243/comments/comment-123/replies",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,
@@ -93,7 +93,7 @@ describe("/replies endpoints", () => {
 
     it("should response 404 when given invalid thread", async () => {
       const payload = {
-        content: "1234567890",
+        content: "testtesttest",
       };
 
       const server = await createServer(container);
@@ -101,7 +101,7 @@ describe("/replies endpoints", () => {
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread-123/comments/comment-123/replies",
+        url: "/threads/thread1243/comments/comment-123/replies",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,
@@ -117,24 +117,24 @@ describe("/replies endpoints", () => {
 
     it("should response 404 when given invalid comment", async () => {
       const payload = {
-        content: "1234567890",
+        content: "testtesttest",
       };
 
       const server = await createServer(container);
       const { token } = await ServerTestHelper.getCredential(server);
 
       await UsersTableTestHelper.addUser({
-        id: "user-16989",
-        username: "wellplay",
+        id: "user128",
+        username: "testuser8",
       });
       await ThreadsTableTestHelper.addThread({
-        id: "thread-12",
-        owner: "user-16989",
+        id: "thread124",
+        owner: "user128",
       });
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread-12/comments/comment-123/replies",
+        url: "/threads/thread124/comments/comment-123/replies",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,
@@ -150,30 +150,30 @@ describe("/replies endpoints", () => {
 
     it("should response 201 when meet all requirement and persist comment data", async () => {
       const payload = {
-        content: "1234567890",
+        content: "testtesttest",
       };
 
       const server = await createServer(container);
       const { token } = await ServerTestHelper.getCredential(server);
 
       await UsersTableTestHelper.addUser({
-        id: "user-6969",
+        id: "user-124",
         username: "test",
       });
       await ThreadsTableTestHelper.addThread({
-        id: "thread-123",
+        id: "thread1243",
         title: "test",
-        owner: "user-6969",
+        owner: "user-124",
       });
       await CommentsTableTestHelper.addComment({
         id: "comment-124",
-        thread_id: "thread-123",
-        owner: "user-6969",
+        thread_id: "thread1243",
+        owner: "user-124",
       });
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread-123/comments/comment-124/replies",
+        url: "/threads/thread1243/comments/comment-124/replies",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,
@@ -195,23 +195,23 @@ describe("/replies endpoints", () => {
       const { token } = await ServerTestHelper.getCredential(server);
 
       await CommentsTableTestHelper.addComment({
-        id: "comment-6868",
-        owner: "user-6969",
-        thread_id: "thread-123",
+        id: "comment-125",
+        owner: "user-124",
+        thread_id: "thread1243",
         content: "ini adalah test",
       });
 
       await RepliesTableTestHelper.addReply({
-        id: "reply-6868",
-        owner: "user-6969",
-        comment_id: "comment-6868",
+        id: "reply-126",
+        owner: "user-124",
+        comment_id: "comment-125",
         content: "ini adalah test",
-        thread_id: "thread-123",
+        thread_id: "thread1243",
       });
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread-123/comments/comment-6868/replies/reply-6868",
+        url: "/threads/thread1243/comments/comment-125/replies/reply-126",
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -230,7 +230,7 @@ describe("/replies endpoints", () => {
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread-123/comments/comment-12390/replies/reply-123",
+        url: "/threads/thread1243/comments/comment-12390/replies/reply-123",
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -247,23 +247,23 @@ describe("/replies endpoints", () => {
       const { token, user_id } = await ServerTestHelper.getCredential(server);
 
       await CommentsTableTestHelper.addComment({
-        id: "comment-169",
+        id: "comment-126",
         owner: user_id,
-        thread_id: "thread-123",
+        thread_id: "thread1243",
         content: "ini adalah test",
       });
 
       await RepliesTableTestHelper.addReply({
-        id: "reply-1009",
+        id: "reply-127",
         owner: user_id,
-        comment_id: "comment-169",
+        comment_id: "comment-126",
         content: "ini adalah test",
-        thread_id: "thread-123", 
+        thread_id: "thread1243",
       });
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread-123/comments/comment-169/replies/reply-1009",
+        url: "/threads/thread1243/comments/comment-126/replies/reply-127",
         headers: {
           authorization: `Bearer ${token}`,
         },

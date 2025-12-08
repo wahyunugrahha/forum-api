@@ -9,14 +9,14 @@ const AddReplyUseCase = require("../AddReplyUseCase");
 describe("AddReplyUseCase", () => {
   it("should orchestrating the add reply action correctly", async () => {
     const payload = {
-      thread_id: "thread-123",
+      thread_id: "thread1243",
       comment_id: "comment-123",
-      content: "123",
+      content: "test",
       owner: "user-123",
     };
 
     const expectedArgument = new NewReply({
-      thread_id: "thread-123",
+      thread_id: "thread1243",
       comment_id: payload.comment_id,
       content: payload.content,
       owner: "user-123",
@@ -24,7 +24,7 @@ describe("AddReplyUseCase", () => {
 
     const mockAddedReply = new AddedReply({
       id: "reply-123",
-      content: "123",
+      content: "test",
       owner: "user-123",
     });
 
@@ -39,7 +39,7 @@ describe("AddReplyUseCase", () => {
       Promise.resolve(
         new AddedReply({
           id: "reply-123",
-          content: "123",
+          content: "test",
           owner: "user-123",
         })
       )
@@ -63,8 +63,8 @@ describe("AddReplyUseCase", () => {
     expect(mockReplyRepository.addReply).toBeCalledWith(expectedArgument);
     expect(mockCommentRepository.verifyCommentThread).toBeCalledWith(
       "comment-123",
-      "thread-123"
+      "thread1243"
     );
-    expect(mockThreadRepository.verifyThread).toBeCalledWith("thread-123");
+    expect(mockThreadRepository.verifyThread).toBeCalledWith("thread1243");
   });
 });

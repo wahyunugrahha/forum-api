@@ -7,8 +7,8 @@ const AddCommentUseCase = require("../AddCommentUseCase");
 describe("AddCommentUseCase", () => {
   it("should orchestrating the add comment action correctly", async () => {
     const payload = {
-      thread_id: "thread-123",
-      content: "123",
+      thread_id: "thread1243",
+      content: "test",
       owner: "user-123",
     };
 
@@ -20,7 +20,7 @@ describe("AddCommentUseCase", () => {
 
     const mockAddedComment = new AddedComment({
       id: "comment-123",
-      content: "123",
+      content: "test",
       owner: "user-123",
     });
 
@@ -30,7 +30,7 @@ describe("AddCommentUseCase", () => {
       Promise.resolve(
         new AddedComment({
           id: "comment-123",
-          content: "123",
+          content: "test",
           owner: "user-123",
         })
       )
@@ -51,6 +51,6 @@ describe("AddCommentUseCase", () => {
 
     expect(result).toStrictEqual(mockAddedComment);
     expect(mockCommentRepository.addComment).toBeCalledWith(expectedArgument);
-    expect(mockThreadRepository.verifyThread).toBeCalledWith("thread-123");
+    expect(mockThreadRepository.verifyThread).toBeCalledWith("thread1243");
   });
 });

@@ -3,7 +3,7 @@ const AddedReply = require("../AddedReply");
 describe("a AddedReply entity", () => {
   it("should throw error when payload did not contain needed property", () => {
     const payload = {
-      id: "123",
+      id: "test123",
     };
 
     expect(() => new AddedReply(payload)).toThrowError(
@@ -14,7 +14,7 @@ describe("a AddedReply entity", () => {
   it("should throw error when payload did not meet data type specification", () => {
     const payload = {
       id: "reply-123",
-      content: 6969,
+      content: test,
       owner: "user-123",
     };
 

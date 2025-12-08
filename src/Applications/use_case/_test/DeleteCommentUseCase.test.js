@@ -4,8 +4,8 @@ const DeleteCommentUseCase = require("../DeleteCommentUseCase");
 describe("DeleteCommentUseCase", () => {
   it("should orchestrating the delete comment action correctly", async () => {
     const payload = {
-      thread_id: "thread-123",
-      owner: "user-6969",
+      thread_id: "thread1243",
+      owner: "user-123",
       comment_id: "comment-123",
     };
 

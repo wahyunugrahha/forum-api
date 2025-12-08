@@ -27,10 +27,10 @@ describe("ReplyRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
@@ -38,18 +38,16 @@ describe("ReplyRepository Postgres", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
         thread_id: thread_id,
-        content: "123",
-        owner: owner,
+        content: "test",        owner: owner,
       });
 
       const fakeGenerator = () => "123";
       const replyRepository = new ReplyRepositoryPostgres(pool, fakeGenerator);
 
       const newReply = new NewReply({
-        thread_id: "thread-123",
+        thread_id: "thread1243",
         comment_id: "comment-123",
-        content: "123",
-        owner: "user-123",
+        content: "test",        owner: "user-123",
       });
 
       const replyResult = await replyRepository.addReply(newReply);
@@ -57,8 +55,7 @@ describe("ReplyRepository Postgres", () => {
       expect(replyResult).toStrictEqual(
         new AddedReply({
           id: "reply-123",
-          content: "123",
-          owner: "user-123",
+          content: "test",          owner: "user-123",
         })
       );
 
@@ -82,10 +79,10 @@ describe("ReplyRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
@@ -93,8 +90,7 @@ describe("ReplyRepository Postgres", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
         thread_id: thread_id,
-        content: "123",
-        owner: owner,
+        content: "test",        owner: owner,
       });
 
       const fakeGenerator = () => "123";
@@ -103,15 +99,14 @@ describe("ReplyRepository Postgres", () => {
       await RepliesTableTestHelper.addReply({
         reply_id: "reply-123",
         comment_id: "comment-123",
-        content: "123",
-        owner: owner,
+        content: "test",        owner: owner,
       });
 
       expect(
         replyRepository.verifyReplyStatus(
           "reply-123",
           "comment-123",
-          "thread-123"
+          "thread1243"
         )
       ).resolves.not.toThrowError(AuthorizationError);
     });
@@ -132,10 +127,10 @@ describe("ReplyRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
@@ -143,8 +138,7 @@ describe("ReplyRepository Postgres", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
         thread_id: thread_id,
-        content: "123",
-        owner: owner,
+        content: "test",        owner: owner,
       });
 
       const fakeGenerator = () => "123";
@@ -153,8 +147,7 @@ describe("ReplyRepository Postgres", () => {
       await RepliesTableTestHelper.addReply({
         reply_id: "reply-123",
         comment_id: "comment-123",
-        content: "123",
-        owner: owner,
+        content: "test",        owner: owner,
       });
 
       expect(
@@ -168,10 +161,10 @@ describe("ReplyRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
@@ -179,18 +172,16 @@ describe("ReplyRepository Postgres", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
         thread_id: thread_id,
-        content: "123",
-        owner: owner,
+        content: "test",        owner: owner,
       });
 
       const fakeGenerator = () => "123";
       const replyRepository = new ReplyRepositoryPostgres(pool, fakeGenerator);
 
       const newReply = new NewReply({
-        thread_id: "thread-123",
+        thread_id: "thread1243",
         comment_id: "comment-123",
-        content: "123",
-        owner: owner,
+        content: "test",        owner: owner,
       });
 
       const replyResult = await replyRepository.addReply(newReply);
@@ -208,21 +199,21 @@ describe("ReplyRepository Postgres", () => {
   describe("get thread replies function", () => {
     it("should return empty replies correctly", async () => {
       const owner = "user-123";
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       const date = new Date("2024-10-26T00:00:00.000Z");
 
-      await UsersTableTestHelper.addUser({ id: owner, username: "apapun" });
+      await UsersTableTestHelper.addUser({ id: owner, username: "test" });
 
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
 
       await CommentsTableTestHelper.addComment({
-        id: "comment-231",
-        content: "231 comment",
+        id: "comment-125",
+        content: "testkomen",
         owner: "user-123",
         thread_id: thread_id,
         date: date,
@@ -230,7 +221,7 @@ describe("ReplyRepository Postgres", () => {
 
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
-        content: "123 comment",
+        content: "testcomment",
         owner: "user-123",
         thread_id: thread_id,
         date: date,
@@ -245,21 +236,21 @@ describe("ReplyRepository Postgres", () => {
 
     it("should return replies correctly", async () => {
       const owner = "user-123";
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       const date = new Date("2024-10-26T00:00:00.000Z");
 
-      await UsersTableTestHelper.addUser({ id: owner, username: "apapun" });
+      await UsersTableTestHelper.addUser({ id: owner, username: "test" });
 
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
 
       await CommentsTableTestHelper.addComment({
-        id: "comment-231",
-        content: "231 comment",
+        id: "comment-125",
+        content: "testkomen",
         owner: "user-123",
         thread_id: thread_id,
         date: date,
@@ -267,7 +258,7 @@ describe("ReplyRepository Postgres", () => {
 
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
-        content: "123 comment",
+        content: "testcomment",
         owner: "user-123",
         thread_id: thread_id,
         date: date,
@@ -276,13 +267,13 @@ describe("ReplyRepository Postgres", () => {
       await RepliesTableTestHelper.addReply({
         id: "reply-123",
         comment_id: "comment-123",
-        content: "123 comment",
+        content: "testcomment",
         owner: "user-123",
         date: new Date("2024-10-26T00:00:00.000Z"),
       });
 
       await RepliesTableTestHelper.addReply({
-        id: "reply-1236",
+        id: "reply-124",
         comment_id: "comment-123",
         content: "1236 comment",
         owner: "user-123",
@@ -290,8 +281,8 @@ describe("ReplyRepository Postgres", () => {
       });
 
       await RepliesTableTestHelper.addReply({
-        id: "reply-12223",
-        comment_id: "comment-231",
+        id: "reply-125",
+        comment_id: "comment-125",
         content: "12223 comment",
         owner: "user-123",
         date: new Date("2024-10-28T00:00:00.000Z"),
@@ -305,24 +296,24 @@ describe("ReplyRepository Postgres", () => {
         new GetReply({
           id: "reply-123",
           comment_id: "comment-123",
-          content: "123 comment",
-          username: "apapun",
+          content: "testcomment",
+          username: "test",
           date: new Date("2024-10-26T00:00:00.000Z"),
           is_deleted: false,
         }),
         new GetReply({
-          id: "reply-1236",
+          id: "reply-124",
           comment_id: "comment-123",
           content: "1236 comment",
-          username: "apapun",
+          username: "test",
           date: new Date("2024-10-27T00:00:00.000Z"),
           is_deleted: false,
         }),
         new GetReply({
-          id: "reply-12223",
-          comment_id: "comment-231",
+          id: "reply-125",
+          comment_id: "comment-125",
           content: "12223 comment",
-          username: "apapun",
+          username: "test",
           date: new Date("2024-10-28T00:00:00.000Z"),
           is_deleted: false,
         }),

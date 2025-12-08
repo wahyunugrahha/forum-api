@@ -10,7 +10,7 @@ const GetDetailThreadUseCase = require("../GetDetailThreadUseCase");
 describe("GetDetailThreadUseCase", () => {
   it("should orchestrating the get thread detail action correctly", async () => {
     const payload = {
-      thread_id: "thread-123",
+      thread_id: "thread1243",
     };
 
     const mockThreadRepository = new ThreadRepository();
@@ -19,11 +19,11 @@ describe("GetDetailThreadUseCase", () => {
       .mockImplementation(() => Promise.resolve());
     mockThreadRepository.findThread = jest.fn().mockImplementation(() => {
       return new GetThread({
-        id: "thread-123",
+        id: "thread1243",
         title: "thread 123",
         body: "contect of thread 123",
         date: new Date("2024-10-26T00:00:00Z"),
-        username: "jono",
+        username: "user-123",
         comments: [],
       });
     });
@@ -35,15 +35,15 @@ describe("GetDetailThreadUseCase", () => {
         return [
           new GetComment({
             id: "comment-123",
-            content: "123 comment",
-            username: "pokemon",
+            content: "testcomment",
+            username: "testuser1",
             date: new Date("2024-10-26T00:00:00Z"),
             is_deleted: true,
           }),
           new GetComment({
-            id: "comment-231",
-            content: "231 comment",
-            username: "digimon",
+            id: "comment-125",
+            content: "testkomen",
+            username: "testuser2",
             date: new Date("2024-10-26T00:00:00Z"),
             is_deleted: false,
           }),
@@ -55,15 +55,15 @@ describe("GetDetailThreadUseCase", () => {
       return [
         new GetReply({
           id: "reply-123",
-          comment_id: "comment-231",
+          comment_id: "comment-125",
           content: "123 reply",
           username: "pokemon",
           date: new Date("2024-10-26T00:00:00Z"),
           is_deleted: true,
         }),
         new GetReply({
-          id: "reply-693",
-          comment_id: "comment-231",
+          id: "reply-128",
+          comment_id: "comment-125",
           content: "693 reply",
           username: "pokemon2",
           date: new Date("2024-10-26T00:00:00Z"),
@@ -82,34 +82,34 @@ describe("GetDetailThreadUseCase", () => {
 
     expect(result).toEqual(
       new GetThread({
-        id: "thread-123",
+        id: "thread1243",
         title: "thread 123",
         body: "contect of thread 123",
         date: new Date("2024-10-26T00:00:00Z"),
-        username: "jono",
+        username: "user-123",
         comments: [
           {
             id: "comment-123",
-            username: "pokemon",
+            username: "testuser1",
             date: new Date("2024-10-26T00:00:00Z"),
             content: "**komentar telah dihapus**",
             replies: [],
           },
           {
-            id: "comment-231",
-            username: "digimon",
+            id: "comment-125",
+            username: "testuser2",
             date: new Date("2024-10-26T00:00:00Z"),
-            content: "231 comment",
+            content: "testkomen",
             replies: [
               {
                 id: "reply-123",
-                username: "pokemon",
+                username: "testuser1",
                 date: new Date("2024-10-26T00:00:00Z"),
                 content: "**balasan telah dihapus**",
               },
               {
-                id: "reply-693",
-                username: "pokemon2",
+                id: "reply-128",
+                username: "testuser2",
                 date: new Date("2024-10-26T00:00:00Z"),
                 content: "693 reply",
               },

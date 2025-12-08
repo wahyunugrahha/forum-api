@@ -25,10 +25,10 @@ describe("CommentRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
@@ -41,7 +41,7 @@ describe("CommentRepository Postgres", () => {
 
       const newComment = new NewComment({
         thread_id: thread_id,
-        content: "123",
+        content: "test",
         owner: owner,
       });
 
@@ -50,7 +50,7 @@ describe("CommentRepository Postgres", () => {
       expect(commentResult).toStrictEqual(
         new AddedComment({
           id: "comment-123",
-          content: "123",
+          content: "test",
           owner: "user-123",
         })
       );
@@ -85,17 +85,17 @@ describe("CommentRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
 
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
-        thread_id: "thread-123",
+        thread_id: "thread1243",
         owner: owner,
       });
 
@@ -130,22 +130,22 @@ describe("CommentRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
 
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
-        thread_id: "thread-123",
+        thread_id: "thread1243",
         owner: owner,
       });
 
       expect(
-        commentRepository.verifyCommentThread("comment-123", "thread-123")
+        commentRepository.verifyCommentThread("comment-123", "thread1243")
       ).resolves.not.toThrowError(NotFoundError);
     });
   });
@@ -155,10 +155,10 @@ describe("CommentRepository Postgres", () => {
       const owner = "user-123";
       await UsersTableTestHelper.addUser({ id: owner });
 
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
@@ -171,7 +171,7 @@ describe("CommentRepository Postgres", () => {
 
       const newComment = new NewComment({
         thread_id: thread_id,
-        content: "123",
+        content: "test",
         owner: owner,
       });
 
@@ -194,12 +194,12 @@ describe("CommentRepository Postgres", () => {
   describe("get thread comments function", () => {
     it("should return empty comments correctly", async () => {
       const owner = "user-123";
-      await UsersTableTestHelper.addUser({ id: owner, username: "apapun" });
+      await UsersTableTestHelper.addUser({ id: owner, username: "test" });
 
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
@@ -213,27 +213,27 @@ describe("CommentRepository Postgres", () => {
 
     it("should return comments correctly", async () => {
       const owner = "user-123";
-      await UsersTableTestHelper.addUser({ id: owner, username: "apapun" });
+      await UsersTableTestHelper.addUser({ id: owner, username: "test" });
 
-      const thread_id = "thread-123";
+      const thread_id = "thread1243";
       await ThreadsTableTestHelper.addThread({
         id: thread_id,
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
 
       const comment1 = {
         id: "comment-123",
-        content: "123 comment",
+        content: "testcomment",
         owner: "user-123",
         thread_id: thread_id,
         date: new Date("2024-10-26T00:00:00.000Z"),
       };
 
       const comment2 = {
-        id: "comment-231",
-        content: "231 comment",
+        id: "comment-125",
+        content: "testkomen",
         owner: "user-123",
         thread_id: thread_id,
         date: new Date("2024-10-27T00:00:00.000Z"),
@@ -249,15 +249,15 @@ describe("CommentRepository Postgres", () => {
       expect(result).toStrictEqual([
         new GetComment({
           id: "comment-123",
-          content: "123 comment",
-          username: "apapun",
+          content: "testcomment",
+          username: "test",
           date: new Date("2024-10-26T00:00:00.000Z"),
           is_deleted: false,
         }),
         new GetComment({
-          id: "comment-231",
-          content: "231 comment",
-          username: "apapun",
+          id: "comment-125",
+          content: "testkomen",
+          username: "test",
           date: new Date("2024-10-27T00:00:00.000Z"),
           is_deleted: false,
         }),

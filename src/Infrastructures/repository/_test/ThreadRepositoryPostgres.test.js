@@ -23,7 +23,7 @@ describe("ThreadRepositoryPostgres", () => {
       await UserTableTestHelper.addUser({ id: owner });
 
       const newThread = new NewThread({
-        title: "123",
+        title: "test",
         body: "this is testing data",
         owner: owner,
       });
@@ -38,13 +38,13 @@ describe("ThreadRepositoryPostgres", () => {
       const result = await threadRepository.addThread(newThread);
       expect(result).toStrictEqual(
         new AddedThread({
-          id: "thread-123",
-          title: "123",
+          id: "thread1243",
+          title: "test",
           owner: "user-123",
         })
       );
 
-      const expected = await ThreadsTableTestHelper.findThread("thread-123");
+      const expected = await ThreadsTableTestHelper.findThread("thread1243");
       expect(expected).toHaveLength(1);
     });
   });
@@ -53,7 +53,7 @@ describe("ThreadRepositoryPostgres", () => {
     it("should throw error 404 when thread not found", async () => {
       const threadRepository = new ThreadRepositoryPostgres(pool, {});
 
-      expect(threadRepository.verifyThread("thread-123")).rejects.toThrowError(
+      expect(threadRepository.verifyThread("thread1243")).rejects.toThrowError(
         NotFoundError
       );
     });
@@ -65,14 +65,14 @@ describe("ThreadRepositoryPostgres", () => {
         username: "pokemon",
       });
       await ThreadsTableTestHelper.addThread({
-        id: "thread-123",
+        id: "thread1243",
         title: "dicoding testing",
         body: "cuman testing doang",
         owner: "user-123",
       });
 
       await expect(
-        threadRepository.verifyThread("thread-123")
+        threadRepository.verifyThread("thread1243")
       ).resolves.not.toThrowError(NotFoundError);
     });
   });
@@ -86,16 +86,16 @@ describe("ThreadRepositoryPostgres", () => {
       });
 
       await ThreadsTableTestHelper.addThread({
-        id: "thread-123",
+        id: "thread1243",
         title: "dicoding testing",
         body: "cuman testing doang",
         owner: "user-123",
       });
 
-      const result = await threadRepository.findThread("thread-123");
+      const result = await threadRepository.findThread("thread1243");
 
       const expectedResult = new GetThread({
-        id: "thread-123",
+        id: "thread1243",
         title: "dicoding testing",
         body: "cuman testing doang",
         date: new Date("2024-10-26T00:00:00.000Z"),

@@ -19,14 +19,14 @@ describe("/comments endpoints", () => {
   describe("when POST /threads/{thread_id}/comments", () => {
     it("should response 401 when not authenticated", async () => {
       const payload = {
-        content: "123",
+        content: "test",
       };
 
       const server = await createServer(container);
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread-123/comments",
+        url: "/threads/thread1243/comments",
         payload: payload,
       });
 
@@ -48,7 +48,7 @@ describe("/comments endpoints", () => {
 
         const response = await server.inject({
           method: "POST",
-          url: "/threads/thread-123/comments",
+          url: "/threads/thread1243/comments",
           payload: payload,
           headers: {
             authorization: `Bearer ${token}`,
@@ -97,7 +97,7 @@ describe("/comments endpoints", () => {
 
     it("should response 404 when given invalid thread", async () => {
       const payload = {
-        content: "1234567890",
+        content: "testtesttest",
       };
 
       const server = await createServer(container);
@@ -105,7 +105,7 @@ describe("/comments endpoints", () => {
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread-123/comments",
+        url: "/threads/thread1243/comments",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,
@@ -121,25 +121,25 @@ describe("/comments endpoints", () => {
 
     it("should response 201 when meet all requirement and persist comment data", async () => {
       const payload = {
-        content: "1234567890",
+        content: "testtesttest",
       };
 
       const server = await createServer(container);
       const { token } = await ServerTestHelper.getCredential(server);
 
       await UsersTableTestHelper.addUser({
-        id: "user-6969",
-        username: "goodgame",
+        id: "user-124",
+        username: "test2",
       });
       await ThreadsTableTestHelper.addThread({
-        id: "thread-123",
-        title: "apapun",
-        owner: "user-6969",
+        id: "thread1243",
+        title: "test",
+        owner: "user-124",
       });
 
       const response = await server.inject({
         method: "POST",
-        url: "/threads/thread-123/comments",
+        url: "/threads/thread1243/comments",
         payload: payload,
         headers: {
           authorization: `Bearer ${token}`,
@@ -161,15 +161,15 @@ describe("/comments endpoints", () => {
       const { token } = await ServerTestHelper.getCredential(server);
 
       await CommentsTableTestHelper.addComment({
-        id: "comment-6868",
-        owner: "user-6969",
-        thread_id: "thread-123",
-        content: "apapun yang penting tes",
+        id: "comment-125",
+        owner: "user-124",
+        thread_id: "thread1243",
+        content: "ini adalah test",
       });
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread-123/comments/comment-6868",
+        url: "/threads/thread1243/comments/comment-125",
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -188,7 +188,7 @@ describe("/comments endpoints", () => {
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread-123/comments/comment-12390",
+        url: "/threads/thread1243/comments/comment-12390",
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -205,15 +205,15 @@ describe("/comments endpoints", () => {
       const { token, user_id } = await ServerTestHelper.getCredential(server);
 
       await CommentsTableTestHelper.addComment({
-        id: "comment-169",
+        id: "comment-126",
         owner: user_id,
-        thread_id: "thread-123",
-        content: "apapun yang penting tes",
+        thread_id: "thread1243",
+        content: "ini adalah test",
       });
 
       const response = await server.inject({
         method: "DELETE",
-        url: "/threads/thread-123/comments/comment-169",
+        url: "/threads/thread1243/comments/comment-126",
         headers: {
           authorization: `Bearer ${token}`,
         },

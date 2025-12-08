@@ -14,7 +14,7 @@ describe("a NewComment entity", () => {
   it("should throw error when payload did not meet data type specification", () => {
     const payload = {
       thread_id: "123",
-      content: 6969,
+      content: test,
       owner: "user-123",
     };
 
