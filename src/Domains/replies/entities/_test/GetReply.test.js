@@ -5,7 +5,7 @@ describe("a GetReply entity", () => {
     const payload = {
       id: "comment-123",
       username: "testcomment",
-      date: "6969",
+      date: "123",
     };
 
     expect(() => new GetReply(payload)).toThrowError(
@@ -19,7 +19,7 @@ describe("a GetReply entity", () => {
       comment_id: "123",
       username: {},
       date: 2021,
-      content: "6969",
+      content: "123",
       is_deleted: "false",
     };
 
@@ -35,7 +35,7 @@ describe("a GetReply entity", () => {
       comment_id: "comment-123",
       username: "123",
       date: new Date("2024-10-26T00:00:00Z"),
-      content: "6969",
+      content: "123",
       is_deleted: false,
     };
 

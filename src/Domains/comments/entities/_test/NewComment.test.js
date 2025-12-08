@@ -27,7 +27,7 @@ describe("a NewComment entity", () => {
     // Arrange
     const payload = {
       thread_id: "123",
-      content: "6969",
+      content: "123",
       owner: "user-123",
     };
 

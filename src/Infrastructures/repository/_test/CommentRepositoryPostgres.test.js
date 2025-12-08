@@ -115,7 +115,7 @@ describe("CommentRepository Postgres", () => {
       );
 
       expect(
-        commentRepository.verifyCommentThread("comment-123", "thread-6969")
+        commentRepository.verifyCommentThread("comment-123", "thread-123")
       ).rejects.toThrowError(NotFoundError);
     });
 

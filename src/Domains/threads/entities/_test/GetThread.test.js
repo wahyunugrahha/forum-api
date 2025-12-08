@@ -18,7 +18,7 @@ describe("an GetThread Entity", () => {
       id: "test123",
       title: 123,
       body: "testcuy",
-      date: "6969",
+      date: "123",
       username: 123,
       comments: [{ id: 123 }],
     };

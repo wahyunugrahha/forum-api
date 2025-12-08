@@ -27,7 +27,7 @@ describe("a AddedReply entity", () => {
     // Arrange
     const payload = {
       id: "reply-123",
-      content: "6969",
+      content: "123",
       owner: "user-123",
     };
 

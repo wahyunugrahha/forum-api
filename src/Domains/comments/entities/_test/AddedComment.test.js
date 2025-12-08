@@ -27,7 +27,7 @@ describe("a AddedComment entity", () => {
     // Arrange
     const payload = {
       id: "comment-123",
-      content: "6969",
+      content: "123",
       owner: "user-123",
     };
 
