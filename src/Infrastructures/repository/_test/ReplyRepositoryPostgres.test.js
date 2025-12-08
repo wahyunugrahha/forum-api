@@ -38,7 +38,8 @@ describe("ReplyRepository Postgres", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
         thread_id: thread_id,
-        content: "test",        owner: owner,
+        content: "test",
+        owner: owner,
       });
 
       const fakeGenerator = () => "123";
@@ -47,7 +48,8 @@ describe("ReplyRepository Postgres", () => {
       const newReply = new NewReply({
         thread_id: "thread123",
         comment_id: "comment-123",
-        content: "test",        owner: "user-123",
+        content: "test",
+        owner: "user-123",
       });
 
       const replyResult = await replyRepository.addReply(newReply);
@@ -55,7 +57,8 @@ describe("ReplyRepository Postgres", () => {
       expect(replyResult).toStrictEqual(
         new AddedReply({
           id: "reply-123",
-          content: "test",          owner: "user-123",
+          content: "test",
+          owner: "user-123",
         })
       );
 
@@ -90,7 +93,8 @@ describe("ReplyRepository Postgres", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
         thread_id: thread_id,
-        content: "test",        owner: owner,
+        content: "test",
+        owner: owner,
       });
 
       const fakeGenerator = () => "123";
@@ -99,7 +103,8 @@ describe("ReplyRepository Postgres", () => {
       await RepliesTableTestHelper.addReply({
         reply_id: "reply-123",
         comment_id: "comment-123",
-        content: "test",        owner: owner,
+        content: "test",
+        owner: owner,
       });
 
       expect(
@@ -138,16 +143,18 @@ describe("ReplyRepository Postgres", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
         thread_id: thread_id,
-        content: "test",        owner: owner,
+        content: "test",
+        owner: owner,
       });
 
       const fakeGenerator = () => "123";
       const replyRepository = new ReplyRepositoryPostgres(pool, fakeGenerator);
 
       await RepliesTableTestHelper.addReply({
-        reply_id: "reply-123",
+        id: "reply-123",
         comment_id: "comment-123",
-        content: "test",        owner: owner,
+        content: "test",
+        owner: owner,
       });
 
       expect(
@@ -172,7 +179,8 @@ describe("ReplyRepository Postgres", () => {
       await CommentsTableTestHelper.addComment({
         id: "comment-123",
         thread_id: thread_id,
-        content: "test",        owner: owner,
+        content: "test",
+        owner: owner,
       });
 
       const fakeGenerator = () => "123";
@@ -181,7 +189,8 @@ describe("ReplyRepository Postgres", () => {
       const newReply = new NewReply({
         thread_id: "thread123",
         comment_id: "comment-123",
-        content: "test",        owner: owner,
+        content: "test",
+        owner: owner,
       });
 
       const replyResult = await replyRepository.addReply(newReply);
@@ -237,7 +246,9 @@ describe("ReplyRepository Postgres", () => {
     it("should return replies correctly", async () => {
       const owner = "user-123";
       const thread_id = "thread123";
-      const date = new Date("2024-10-26T00:00:00.000Z");
+      const date1 = new Date("2024-10-26T00:00:00.000Z");
+      const date2 = new Date("2024-10-27T00:00:00.000Z");
+      const date3 = new Date("2024-10-28T00:00:00.000Z");
 
       await UsersTableTestHelper.addUser({ id: owner, username: "test" });
 
@@ -253,7 +264,7 @@ describe("ReplyRepository Postgres", () => {
         content: "testkomen",
         owner: "user-123",
         thread_id: thread_id,
-        date: date,
+        date: date2,
       });
 
       await CommentsTableTestHelper.addComment({
@@ -261,7 +272,7 @@ describe("ReplyRepository Postgres", () => {
         content: "testcomment",
         owner: "user-123",
         thread_id: thread_id,
-        date: date,
+        date: date1,
       });
 
       await RepliesTableTestHelper.addReply({
@@ -269,7 +280,7 @@ describe("ReplyRepository Postgres", () => {
         comment_id: "comment-123",
         content: "testcomment",
         owner: "user-123",
-        date: new Date("2024-10-26T00:00:00.000Z"),
+        date: date1,
       });
 
       await RepliesTableTestHelper.addReply({
@@ -277,7 +288,7 @@ describe("ReplyRepository Postgres", () => {
         comment_id: "comment-123",
         content: "1 comment",
         owner: "user-123",
-        date: new Date("2024-10-27T00:00:00.000Z"),
+        date: date2,
       });
 
       await RepliesTableTestHelper.addReply({
@@ -285,7 +296,7 @@ describe("ReplyRepository Postgres", () => {
         comment_id: "comment-125",
         content: "2 comment",
         owner: "user-123",
-        date: new Date("2024-10-28T00:00:00.000Z"),
+        date: date3,
       });
 
       const replyRepository = new ReplyRepositoryPostgres(pool, {});
@@ -293,30 +304,36 @@ describe("ReplyRepository Postgres", () => {
 
       expect(result).toHaveLength(3);
       expect(result).toStrictEqual([
-        new GetReply({
+        {
           id: "reply-123",
           comment_id: "comment-123",
           content: "testcomment",
           username: "test",
-          date: new Date("2024-10-26T00:00:00.000Z"),
+          date: date1,
           is_deleted: false,
-        }),
-        new GetReply({
+          thread_id: "thread123",
+          owner: "user-123",
+        },
+        {
           id: "reply-124",
           comment_id: "comment-123",
           content: "1 comment",
           username: "test",
-          date: new Date("2024-10-27T00:00:00.000Z"),
+          date: date2,
           is_deleted: false,
-        }),
-        new GetReply({
+          thread_id: "thread123",
+          owner: "user-123",
+        },
+        {
           id: "reply-125",
           comment_id: "comment-125",
           content: "2 comment",
           username: "test",
-          date: new Date("2024-10-28T00:00:00.000Z"),
+          date: date3,
           is_deleted: false,
-        }),
+          thread_id: "thread123",
+          owner: "user-123",
+        },
       ]);
     });
   });

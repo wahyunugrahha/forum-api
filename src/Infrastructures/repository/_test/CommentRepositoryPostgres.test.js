@@ -229,6 +229,7 @@ describe("CommentRepository Postgres", () => {
         owner: "user-123",
         thread_id: thread_id,
         date: new Date("2024-10-26T00:00:00.000Z"),
+        is_deleted: false,
       };
 
       const comment2 = {
@@ -237,6 +238,7 @@ describe("CommentRepository Postgres", () => {
         owner: "user-123",
         thread_id: thread_id,
         date: new Date("2024-10-27T00:00:00.000Z"),
+        is_deleted: false,
       };
 
       await CommentsTableTestHelper.addComment(comment2);
@@ -247,20 +249,20 @@ describe("CommentRepository Postgres", () => {
 
       expect(result).toHaveLength(2);
       expect(result).toStrictEqual([
-        new GetComment({
+        {
           id: "comment-123",
           content: "testcomment",
           username: "test",
           date: new Date("2024-10-26T00:00:00.000Z"),
           is_deleted: false,
-        }),
-        new GetComment({
+        },
+        {
           id: "comment-125",
           content: "testkomen",
           username: "test",
           date: new Date("2024-10-27T00:00:00.000Z"),
           is_deleted: false,
-        }),
+        },
       ]);
     });
   });

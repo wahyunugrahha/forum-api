@@ -1,7 +1,6 @@
 const AuthorizationError = require("../../Commons/exceptions/AuthorizationError");
 const NotFoundError = require("../../Commons/exceptions/NotFoundError");
 const AddedReply = require("../../Domains/replies/entities/AddedReply");
-const GetReply = require("../../Domains/replies/entities/GetReply");
 const ReplyRepository = require("../../Domains/replies/ReplyRepository");
 
 class ReplyRepositoryPostgres extends ReplyRepository {
@@ -74,13 +73,9 @@ class ReplyRepositoryPostgres extends ReplyRepository {
       values: [thread_id],
     };
 
-    const { rowCount, rows } = await this._pool.query(query);
+    const { rows } = await this._pool.query(query);
 
-    if (!rowCount) {
-      return [];
-    }
-
-    return rows.map((item) => new GetReply({ ...item }));
+    return rows;
   }
 }
 
